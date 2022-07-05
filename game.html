@@ -7,7 +7,8 @@
 <body>
 <canvas id="gameCanvas" width="400" height="400"></canvas>
 <script>
-var canvas, canvasContext;
+var canvas;
+var canvasContext;
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
@@ -17,12 +18,12 @@ window.onload = function() {
 }
 
 function mainloop() {
- colorRect(0,0,canvas.width,canvas.height, 'blue');
- colorRect(0,0,25,40, 'red');
+ colorRect(0 ,0 , canvas.width, canvas.height, 'red');
+ colorRect(0, 0, 25, 40, 'red');
 
 }
 function colorRect(x,y,w,h,c){
-    canvasContext.fillstyle = c;
+    canvasContext.fillStyle = c;
     canvasContext.fillRect(x,y,w,h);
 } 
   
