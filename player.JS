@@ -1,36 +1,40 @@
 class Player {
-constructor(src,x,y,w,h,xSpeed,ySpeed){
+
+constructor(x,y,w,h,xSpeed,ySpeed){
 this.x = x;
 this.y = y;
 this.w = w;
 this.h = h;
-this.src = src;
 this.xSpeed = xSpeed;
 this.ySpeed = ySpeed;
 
+var playerimg = new Image(w, h);
+playerimg.src = 'sprites/player1.png';
+document.body.appendChild(playerimg);
+this.src = playerimg;
 
 
 }
-drawimg(){
-    canvasContext.drawImage(src, x, y, w, h);
+draw(){
+    canvasContext.drawImage(this.src, this.x,this.y,this.w,this.h);
 
 }
 
 move(){
-    if (d && playerXpos < canvas.width - playerSize) {
-        playerXpos += playerXspeed;
+    if (d && this.x < canvas.width - this.w) {
+        this.x += this.xSpeed;
     } // right move
 
-    if (a && playerXpos > 0) {
-        playerXpos -= playerXspeed;
+    if (a && this.x > 0) {
+        this.x -= this.xSpeed;
     } // left move
 
-    if (w && playerYpos > 0) {
-        playerYpos -= playerYspeed;
+    if (w && this.y > 0) {
+        this.y -= this.ySpeed;
     } //up move
 
-    if (s && playerYpos < canvas.height - playerSize) {
-        playerYpos += playerYspeed;
+    if (s && this.y < canvas.height - this.h) {
+        this.y += this.ySpeed;
     } //down move
 
 
