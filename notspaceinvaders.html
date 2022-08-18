@@ -73,7 +73,8 @@
 
 
 
-
+        var player =  new
+        Player(playerXpos, playerYpos, playerSize, playerSize, playerXspeed, playerYspeed);
 
         // main loop 
         function mainloop() {
@@ -99,9 +100,10 @@
 
                 drawImg(background, imgXpos, imgYpos, imgW, imgH) //background
                 colorRect(Xpos, Ypos, LINE_SIZE, LINE_SIZE, bulletColor) // bullet
-               // drawImg(player, playerXpos, playerYpos, playerSize, playerSize) //player ship
+               // drawImg(playerimg, playerXpos, playerYpos, playerSize, playerSize) //player ship
                 cooldownFunc();
-              //  playerMove();
+                player.draw();
+                player.move();
                 colorRect(SSXpos, SSYpos, SSSIZE, SSSIZE, 'red')
                 if (settingUp) { // initial spwaning
                     for (var i = 0; i < totalEnemies; i++) {
@@ -143,17 +145,14 @@
         var WordXPos = 50;
         var WordYPos = 900 / 2;
 
-
-
         //player vars
 
         var playerSize = 40;
-        var playerXpos = 0;
+        var playerXpos = 20;
         var playerYpos = 900 / 2;
         var playerXspeed = 10;
         var playerYspeed = 10;
-        var player =  new
-        Player(player,playerXpos,playerYpos,playerSize,playerSize);
+        
         //enemy vars
 
         var BadShips = [];
@@ -236,8 +235,7 @@
         var background = new Image();
         background.src = 'images/background.jpg';
 
-        var player = new Image();
-        player.src = 'sprites/player1.png'; //normal sprite
+   
 
         
         var Firing = new Image();
@@ -274,11 +272,6 @@
         } //end func
 
 
-
-
-
-
-
         function EnemyMove() {
             BadShips.forEach(function(BadShips, i, array) {
                 BadShips.EnemyYpos = BadShips.EnemyYpos + BadShips.EnemyYSpeed
@@ -302,24 +295,13 @@
                     Gamerun = 2;
 
 
-
-
                 }
-
-
-
-
-
-
 
 
             }); // foreach loop END
 
 
         } //end func
-
-
-
 
 
 
@@ -384,9 +366,6 @@
             } //end func
 
 
-
-
-
         } //end func
         //moving funcs
 
@@ -425,12 +404,7 @@
 
 
 
-
         //KEYPRESS/RELEASE
-
-
-
-
 
 
         function keypressed(evt) {
@@ -470,9 +444,6 @@
 
         } //end func
 
-
-
-
         function keyreleased(evt) {
 
             if (evt.keyCode == AKEY) { //left
@@ -502,12 +473,6 @@
         } //end func
 
 
-
-
-
-
-
-
         function colortext(msg, x, y, f, c) {
             canvasContext.fillStyle = c;
             canvasContext.font = f;
@@ -518,13 +483,7 @@
 
 
 
-
-
-
-
         //bullet and enemy collison 
-
-
 
 
         function Killing() {
@@ -562,11 +521,6 @@
 
 
 
-
-
-
-
-
         };
         // end func
 
@@ -588,9 +542,6 @@
         var four = false;
         var backup = false;
         
-
-
-
 
 
 
