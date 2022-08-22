@@ -104,7 +104,7 @@
                 cooldownFunc();
                 player.draw();
                 player.move();
-                colorRect(SSXpos, SSYpos, SSSIZE, SSSIZE, 'red')
+                colorRect(SSXpos, SSYpos, SSSIZE, SSSIZE,bulletColor )
                 if (settingUp) { // initial spwaning
                     for (var i = 0; i < totalEnemies; i++) {
                         SpawnEnemies();
@@ -235,12 +235,6 @@
         var background = new Image();
         background.src = 'images/background.jpg';
 
-   
-
-        
-        var Firing = new Image();
-        Firing.src = 'sprites/player2.png'; //shooting sprite
-
         var Enemy = new Image();
         Enemy.src = 'sprites/enemy.png';
 
@@ -336,7 +330,7 @@
         function shooting() {
             if (shoot && cooldown) { //normal
                 YSpeed = 25;
-                bulletColor = 'orange';
+               
                 Xpos = playerXpos + (playerSize / 2);
                 Ypos = playerYpos;
                 shotType = false;
@@ -346,7 +340,7 @@
 
             if (q && Ammo > 0) { //nuke
                 YSpeed = 10;
-                bulletColor = 'green';
+               
                 Xpos = playerXpos + (playerSize / 2);
                 Ypos = playerYpos;
                 Ammo = Ammo - 1;
@@ -426,16 +420,16 @@
             }
             if (evt.keyCode == QKEY) { //down
                 q = true;
-                shoot = true;
+                bulletColor = 'blue';
                 shooting();
-                drawImg(Firing, playerXpos, playerYpos, playerSize, playerSize); //changes 'sprite' to one with a fire ball behind it
+    
 
             }
             if (evt.keyCode == SHOOTKEY) { //shoot
                 shoot = true;
-
+            bulletColor = 'orange';
                 shooting();
-                drawImg(Firing, playerXpos, playerYpos, playerSize, playerSize); //changes 'sprite' to one with a fire ball behind it
+             
                 SHOOTSOUND.play();
 
 
