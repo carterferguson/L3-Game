@@ -15,8 +15,8 @@
 
 
         }
-
     </style>
+        <script src="player.JS"></script>
     <audio id='sound'>
         <source src="music/BGMUSIC.mp3"><!-- Background Music -->
     </audio>
@@ -45,13 +45,13 @@
         <source src="music/Missile.mp3">
     </audio>
     <!-- If you get sick of getting rick rolled switch it to the MUSIC mp3 instead of rick for the more approriate song-->
-    <script src="player.JS"></script>
+
 
     <script>
         //START OF SCRIPT
         var canvas, canvasContext;
 
-        window.onload = function() {
+        window.onload = function () {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
@@ -60,7 +60,7 @@
             document.addEventListener('keyup', keyreleased);
 
         }
-
+        var Gamerun = 1;
 
         var NewGame = 'insert string';
 
@@ -73,11 +73,15 @@
 
 
 
-        var player =  new
-        Player(playerXpos, playerYpos, playerSize, playerSize, playerXspeed, playerYspeed);
 
+        playerimg = [];
+        playerimg.src = [];
+        var player = new
+        Player(playerimg, playerXpos, playerYpos, playerSize, playerSize, playerXspeed, playerYspeed);
         // main loop 
         function mainloop() {
+
+
 
             if (Gamerun == 2) {
                 one = false;
@@ -100,11 +104,12 @@
 
                 drawImg(background, imgXpos, imgYpos, imgW, imgH) //background
                 colorRect(Xpos, Ypos, LINE_SIZE, LINE_SIZE, bulletColor) // bullet
-               // drawImg(playerimg, playerXpos, playerYpos, playerSize, playerSize) //player ship
+                bulletmove();
+
                 cooldownFunc();
                 player.draw();
                 player.move();
-                colorRect(SSXpos, SSYpos, SSSIZE, SSSIZE,bulletColor )
+                colorRect(SSXpos, SSYpos, SSSIZE, SSSIZE, bulletColor)
                 if (settingUp) { // initial spwaning
                     for (var i = 0; i < totalEnemies; i++) {
                         SpawnEnemies();
@@ -128,15 +133,15 @@
                 colortext('You have ' + Ammo + ' nukes left', 10, 50, '30px Arial', 'green')
             }
             MyMusic();
- 
-        }
-        //end main func
+
+
+        } //end main func
 
 
         //vars
         var song = prompt('pick a song, one two three or four', 'one');
         //background vars
-        
+
         var imgXpos = 0;
         var imgYpos = 0;
         var imgW = 800;
@@ -144,7 +149,7 @@
         var dif = true;
         var WordXPos = 50;
         var WordYPos = 900 / 2;
-
+ 
         //player vars
 
         var playerSize = 40;
@@ -152,7 +157,7 @@
         var playerYpos = 900 / 2;
         var playerXspeed = 10;
         var playerYspeed = 10;
-        
+
         //enemy vars
 
         var BadShips = [];
@@ -217,7 +222,10 @@
 
 
 
-        var Gamerun = 1;
+      function bulletmove(){
+        Ypos = Ypos - YSpeed;
+
+      }
 
 
 
@@ -257,7 +265,7 @@
 
 
         function drawEnemies() { //draws enemy sprites
-            BadShips.forEach(function(ship, i, array) {
+            BadShips.forEach(function (ship, i, array) {
                 drawImg(Enemy, ship.EnemyXpos, ship.EnemyYpos, ship.EnemySize, ship.EnemySize)
             });
 
@@ -267,7 +275,7 @@
 
 
         function EnemyMove() {
-            BadShips.forEach(function(BadShips, i, array) {
+            BadShips.forEach(function (BadShips, i, array) {
                 BadShips.EnemyYpos = BadShips.EnemyYpos + BadShips.EnemyYSpeed
                 if (BadShips.EnemyYpos > canvas.height) {
                     BadShips.EnemyYpos = BadShips.EnemySize;
@@ -279,7 +287,9 @@
 
                 }
 
-                if (playerXpos + playerSize > BadShips.EnemyXpos && playerXpos < BadShips.EnemyXpos + BadShips.EnemySize && playerYpos + playerSize > BadShips.EnemyYpos && playerYpos < BadShips.EnemyYpos + BadShips.EnemySize) {
+                if (playerXpos + playerSize > BadShips.EnemyXpos && playerXpos < BadShips.EnemyXpos +
+                    BadShips.EnemySize && playerYpos + playerSize > BadShips.EnemyYpos && playerYpos <
+                    BadShips.EnemyYpos + BadShips.EnemySize) {
 
 
 
@@ -330,7 +340,7 @@
         function shooting() {
             if (shoot && cooldown) { //normal
                 YSpeed = 25;
-               
+
                 Xpos = playerXpos + (playerSize / 2);
                 Ypos = playerYpos;
                 shotType = false;
@@ -338,9 +348,9 @@
                 hit = true;
             }
 
-            if (q && Ammo > 0) { //nuke
+            if (q) { //nuke
                 YSpeed = 10;
-               
+
                 Xpos = playerXpos + (playerSize / 2);
                 Ypos = playerYpos;
                 Ammo = Ammo - 1;
@@ -348,15 +358,17 @@
                 hit = true;
 
                 Missile.currentTime = 0;
-                
+
                 Missile.play();
             }
 
             if (hit) {
 
-                Ypos -= YSpeed
-                hit = false;
+                Ypos -= YSpeed;
                 cooldown = false;
+                hit = false;
+
+                
             } //end func
 
 
@@ -368,32 +380,7 @@
                 cooldown = true;
         }
 
-        function playerMove() {
-            if (Xpos > 0) {
-                Ypos = Ypos - YSpeed
 
-            } //bullet move
-
-            if (d && playerXpos < canvas.width - playerSize) {
-                playerXpos += playerXspeed;
-            } // right move
-
-            if (a && playerXpos > 0) {
-                playerXpos -= playerXspeed;
-            } // left move
-
-            if (w && playerYpos > 0) {
-                playerYpos -= playerYspeed;
-            } //up move
-
-            if (s && playerYpos < canvas.height - playerSize) {
-                playerYpos += playerYspeed;
-            } //down move
-
-
-
-
-        } //end func
 
 
 
@@ -418,18 +405,18 @@
                 s = true;
 
             }
-            if (evt.keyCode == QKEY) { //down
+            if (evt.keyCode == QKEY && Ammo > 0) { //down
                 q = true;
                 bulletColor = 'blue';
                 shooting();
-    
+
 
             }
             if (evt.keyCode == SHOOTKEY) { //shoot
                 shoot = true;
-            bulletColor = 'orange';
+                bulletColor = 'orange';
                 shooting();
-             
+
                 SHOOTSOUND.play();
 
 
@@ -481,9 +468,10 @@
 
 
         function Killing() {
-            BadShips.forEach(function(ships, i, array) {
+            BadShips.forEach(function (ships, i, array) {
 
-                if (Xpos + LINE_SIZE > ships.EnemyXpos && Xpos < ships.EnemyXpos + ships.EnemySize && Ypos + LINE_SIZE > ships.EnemyYpos && Ypos < ships.EnemyYpos + ships.EnemySize) {
+                if (Xpos + LINE_SIZE > ships.EnemyXpos && Xpos < ships.EnemyXpos + ships.EnemySize && Ypos +
+                    LINE_SIZE > ships.EnemyYpos && Ypos < ships.EnemyYpos + ships.EnemySize) {
                     KillScore = KillScore + 1;
                     ships.EnemyYSpeed = Math.floor(Math.random() * (maxSpeed - minSpeed)) + minSpeed;
                     ships.EnemyYpos = 10;
@@ -535,7 +523,7 @@
         var three = false;
         var four = false;
         var backup = false;
-        
+
 
 
 
@@ -602,7 +590,6 @@
 
 
         //END SCRIPT  
-
     </script>
 
 </body>
