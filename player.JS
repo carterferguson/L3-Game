@@ -1,27 +1,19 @@
 class Player {
 
     constructor(playerimg, x, y, w, h, xSpeed, ySpeed) {
-        if (q && Ammo > 0 || shoot == true) {
-            var Firing = new Image(this.w, this.h);
-            Firing = 'sprites/player2.png'; //shooting sprite
-            this.x = x;
-            this.y = y;
-            this.w = w;
-            this.h = h;
-            this.xSpeed = xSpeed;
-            this.ySpeed = ySpeed;
-            this.src = Firing;
-        } else {
-            var playerimg = new Image(this.w, this.h);
-            playerimg.src = 'sprites/player1.png'; //standerd sprite
-            this.src = playerimg;
-            this.x = x;
-            this.y = y;
-            this.w = w;
-            this.h = h;
-            this.xSpeed = xSpeed;
-            this.ySpeed = ySpeed;
-        }
+
+
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+       
+        var playerimg = new Image();
+        playerimg.src = 'sprites/player1.png'; //standerd sprite
+        this.src = playerimg;
+
     }
     draw() {
         canvasContext.drawImage(this.src, this.x, this.y, this.w, this.h);
@@ -40,7 +32,7 @@ class Player {
         } //up move
 
         if (s && this.y < canvas.height - this.h) {
-            this.y = this.y + this.xypeed;
+            this.y = this.y + this.xSpeed;
         } //down move
     }
 
