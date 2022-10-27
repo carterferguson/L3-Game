@@ -1,6 +1,24 @@
 <!doctype html>
 
 <body>
+
+    <head>
+        <title>Not Space Invaders</title>
+
+    </head>
+
+
+    <h1> Controls</h1>
+    <p class=" contols">WASD keys for movement
+        <br> space key for firing your main projectile
+        <br> Q key for your nuke, ne careful you only have 3
+
+    </p>
+    <p class="instruction">
+ joe schmo
+
+    </p>
+
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <style>
         html {
@@ -10,10 +28,25 @@
 
         canvas {
             display: block;
-            margin: 20vh auto;
+            margin: 10vh 20vh;
             /* puts Game canvas in center*/
 
 
+        }
+
+        h1 {
+            font-size: 40px;
+            color: crimson;
+        }
+
+        .contols {
+            font-size: 18px;
+            color: hotpink;
+        }
+        .instruction{
+            font-size: 17px;
+            color: cyan;
+            align-items: right;
         }
     </style>
     <script src="player.JS"></script>
@@ -70,9 +103,9 @@
         while (UserName == '' || UserName == null) {
             UserName = prompt('Enter a Username');
         }
-         //player vars
+        //player vars
 
-         var playerSize = 40;
+        var playerSize = 40;
         var playerXpos = 20;
         var playerYpos = 900 / 2;
         var playerXspeed = 10;
@@ -84,8 +117,8 @@
         Player(playerimg, playerXpos, playerYpos, playerSize, playerSize, playerXspeed, playerYspeed);
 
 
-       
-        
+
+
         // main loop 
         function mainloop() {
 
@@ -135,8 +168,12 @@
                 }
                 EnemyMove();
                 Killing();
-                colortext(UserName + ' score =' + KillScore, 10, 20, '30px Arial', 'green')
-                colortext('You have ' + Ammo + ' nukes left', 10, 50, '30px Arial', 'green')
+
+                colortext(UserName + ' score =' + KillScore, 10, 20, '30px Arial', 'green');
+                colortext('You have ' + Ammo + ' nukes left', 10, 50, '30px Arial', 'green');
+
+
+
             }
             MyMusic();
 
@@ -156,7 +193,7 @@
         var WordXPos = 50;
         var WordYPos = 900 / 2;
 
-       
+
         //enemy vars
 
         var BadShips = [];
@@ -522,7 +559,6 @@
             } //main if end
         } //end func
         //END SCRIPT  
-       
     </script>
 
 </body>
