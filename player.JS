@@ -9,18 +9,18 @@ class Player {
         this.h = h;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
-       
+
         var playerimg = new Image();
         playerimg.src = 'sprites/player1.png'; //standerd sprite
         this.src = playerimg;
-        if(shoot == true){
+        if (shoot == true) {
             var playerimg = new Image();
             playerimg.src = 'sprites/player2.png'; //shooting sprite
             this.src = playerimg;
 
         }
-            
-        
+
+
 
     }
     draw() {
@@ -28,8 +28,8 @@ class Player {
     }
     move() {
         if (d && this.x < canvas.width - this.w) {
-           playerXpos = playerXpos + playerXspeed;
-           this.x = this.x + this.xSpeed;
+            playerXpos = playerXpos + playerXspeed;
+            this.x = this.x + this.xSpeed;
         } // right move
 
         if (a && this.x > 0) {
